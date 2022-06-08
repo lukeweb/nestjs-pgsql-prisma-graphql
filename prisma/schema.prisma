@@ -11,11 +11,14 @@ datasource db {
 }
 
 model User {
-  id    String  @unique
-  email String  @unique
-  password String
-  name  String?
-  lastName String
-  city String
-  postCode String
+  id         String   @unique @db.VarChar(255)
+  email      String   @unique @db.VarChar(255)
+  password   String   @db.VarChar(255)
+  name       String?  @db.VarChar(255)
+  active     Boolean? @db.Boolean() @default(false)
+  lastName   String?  @map("last_name") @db.VarChar(255)
+  city       String?  @db.VarChar(255)
+  postalCode String?  @map("postal_code") @db.VarChar(255)
+
+  @@map("user")
 }
