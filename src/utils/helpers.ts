@@ -5,7 +5,7 @@ export const generateUlidId = (): string => ulid();
 
 export const createBcryptHash = async (
   word: string,
-  saltRounds: number = 16,
+  saltRounds = 16,
 ): Promise<string> => {
   return hashSync(word, await genSalt(saltRounds));
 };

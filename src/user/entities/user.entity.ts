@@ -12,17 +12,23 @@ export class User {
   password: string;
 
   @Field(() => Boolean, { description: 'Indicates if user is active' })
-  active: boolean
+  active: boolean;
 
-  @Field(() => String, { description: "User name",  nullable: true })
+  @Field(() => String, { description: 'User name', nullable: true })
   name?: string;
 
-  @Field(() => String, { description: "User last name", nullable: true })
+  @Field(() => String, { description: 'User last name', nullable: true })
   lastName?: string;
 
-  @Field(() => String, { description: "City that is declared by user", nullable: true })
+  @Field(() => String, {
+    description: 'City that is declared by user',
+    nullable: true,
+  })
   city?: string;
 
-  @Field(() => String, { description: "Postal code of city declared by user", nullable: true })
+  @Field(() => String, {
+    description: 'Postal code of city declared by user',
+    nullable: true,
+  })
   postalCode?: string;
 }

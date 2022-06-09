@@ -3,6 +3,8 @@ import { UserService } from './user.service';
 import { User } from './entities/user.entity';
 import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
+import { AuthGuard } from '../auth/guard/auth.guard';
+import { UseGuards } from '@nestjs/common';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -16,11 +18,13 @@ export class UserResolver {
   }
 
   @Query(() => [User], { name: 'users' })
+  @UseGuards(AuthGuard)
   findAll(): Promise<User[]> {
     return this.userService.findAll();
   }
 
   @Query(() => User, { name: 'user' })
+  @UseGuards(AuthGuard)
   findOne(
     @Args('id', { type: () => String }) id: string,
   ): Promise<Partial<User>> {
@@ -28,11 +32,13 @@ export class UserResolver {
   }
 
   @Mutation(() => User)
+  @UseGuards(AuthGuard)
   updateUser(@Args('updateUserInput') updateUserInput: UpdateUserInput) {
     return this.userService.update(updateUserInput.id, updateUserInput);
   }
 
   @Mutation(() => User)
+  @UseGuards(AuthGuard)
   removeUser(@Args('id', { type: () => String }) id: string) {
     return this.userService.remove(id);
   }

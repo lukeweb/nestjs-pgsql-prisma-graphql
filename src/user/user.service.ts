@@ -11,9 +11,7 @@ export class UserService {
   constructor(private readonly prismaService: PrismaService) {}
 
   async create(createUserInput: CreateUserInput): Promise<User> {
-    createUserInput.password = await createBcryptHash(
-      createUserInput.password,
-    );
+    createUserInput.password = await createBcryptHash(createUserInput.password);
     return this.prismaService.user.create({
       data: merge<CreateUserInput, { id: string }>(createUserInput, {
         id: generateUlidId(),

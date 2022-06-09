@@ -4,6 +4,7 @@ import { ConfigFactoryKeyHost, registerAs } from '@nestjs/config';
 export interface Config {
   APP_PORT: number;
   DATABASE_URL: string;
+  SECRET_PHRASE: string;
 }
 
 // ## TODO: Fix problem with envalid
@@ -22,5 +23,6 @@ export const config: (() => Config) & ConfigFactoryKeyHost<Config> = registerAs(
   (): Config => ({
     APP_PORT: parseInt(process.env.APP_PORT),
     DATABASE_URL: process.env.DATABASE_URL,
+    SECRET_PHRASE: process.env.SECRET_PHRASE,
   }),
 );

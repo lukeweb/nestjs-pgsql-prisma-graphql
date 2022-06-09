@@ -7,5 +7,5 @@ export class UpdateUserInput extends PartialType(CreateUserInput) {
   id: string;
 
   @Field(() => Boolean, { description: 'Indicates if user is active' })
-  active?: boolean
+  active: boolean;
 }
