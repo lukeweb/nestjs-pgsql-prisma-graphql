@@ -39,11 +39,26 @@ export class UserService {
     });
   }
 
-  update(id: string, updateUserInput: UpdateUserInput) {
-    return `This action updates a #${id} user`;
+  async update(id: string, updateUserInput: UpdateUserInput) {
+    if (updateUserInput.password) {
+      updateUserInput.password = await createBcryptHash(
+        updateUserInput.password,
+      );
+    }
+
+    return this.prismaService.user.update({
+      where: {
+        id,
+      },
+      data: updateUserInput,
+    });
   }
 
-  remove(id: string) {
-    return `This action removes a #${id} user`;
+  remove(id: string): Promise<User> {
+    return this.prismaService.user.delete({
+      where: {
+        id,
+      },
+    });
   }
 }

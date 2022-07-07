@@ -29,12 +29,13 @@ export class AuthGuard implements CanActivate {
     const user = (await this.jwtService.verify(token, {
       secret: this.configService.get<string>('SECRET_PHRASE'),
     })) as Partial<User>;
+
     if (!user) throw new UnauthorizedException('Invalid access token');
 
     if (!user.active) throw new UnauthorizedException('Account is not active');
 
     ctx.getContext().user = user;
-    
+
     return true;
   }
 }
