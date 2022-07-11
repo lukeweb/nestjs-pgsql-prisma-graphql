@@ -8,4 +8,7 @@ export class UpdateUserInput extends PartialType(CreateUserInput) {
 
   @Field(() => Boolean, { description: 'Indicates if user is active' })
   active: boolean;
+
+  @Field(() => Date)
+  updatedAt: Date;
 }

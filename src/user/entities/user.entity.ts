@@ -1,4 +1,5 @@
 import { ObjectType, Field } from '@nestjs/graphql';
+import { Role } from '@prisma/client';
 
 @ObjectType()
 export class User {
@@ -31,4 +32,15 @@ export class User {
     nullable: true,
   })
   postalCode?: string;
+
+  @Field(() => Role, {
+    nullable: false,
+  })
+  role: Role;
+
+  @Field(() => Date)
+  createdAt?: Date;
+
+  @Field(() => Date, { nullable: true })
+  updatedAt?: Date;
 }

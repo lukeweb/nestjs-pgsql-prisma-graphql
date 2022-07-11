@@ -1,4 +1,5 @@
 import { InputType, Field } from '@nestjs/graphql';
+import { Role } from '@prisma/client';
 
 @InputType()
 export class CreateUserInput {
@@ -19,4 +20,7 @@ export class CreateUserInput {
 
   @Field(() => String, { nullable: true })
   postalCode?: string;
+
+  @Field(() => Role, { nullable: false })
+  role?: Role;
 }
