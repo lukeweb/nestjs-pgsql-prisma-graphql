@@ -15,3 +15,18 @@ services:
       PGADMIN_DEFAULT_PASSWORD: root
     ports:
       - "5050:80"
+  api:
+    container_name: graphql-api
+    build:
+      context: ./
+      dockerfile: Dockerfile.dev
+    env_file:
+      - .env
+    ports:
+      - 3000:3000
+    volumes:
+      - ./src:/app/src
+      - ./test:/app/test
+      - ./prisma:/app/prisma
+    depends_on:
+      - postgres
